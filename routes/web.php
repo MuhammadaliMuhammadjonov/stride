@@ -33,4 +33,6 @@ Route::get( '/admin1', function(){
     Route::get( '/menu', [MenuController::class, 'index'])->name('menu');
     Route::get( '/menu/create', [MenuController::class, 'create'])->name('menu.create');
     Route::post( '/menu/store', [MenuController::class, 'store'])->name('menu.store');
+    Route::post( '/menu/update', [MenuController::class, 'update'])->name('menu.update');
+    Route::get( '/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
 

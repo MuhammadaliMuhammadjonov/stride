@@ -31,14 +31,6 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'string|required',
-        // ]);
-        
-        // if ($validator->fails())
-        // {
-        //     return view('Admin.pages.Menu.create')->with('errors',  $validator->errors() );
-        // }
 
         $newMenu = new Section();
         $newMenu->name = $request->name;
@@ -60,15 +52,21 @@ class MenuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $menu = Section::find($id);
+        return view('Admin.pages.Menu.update', compact('menu'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MenuRequest $request)
     {
-        //
+        $menu = Section::find($request->id);
+        $menu->name = $request->name;
+        $menu->save();
+        return $this->index();
     }
 
     /**

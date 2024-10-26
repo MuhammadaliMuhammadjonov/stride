@@ -31,7 +31,7 @@ class MenuRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The name field is required.',
+            'name.required' => 'Menu nomi majburiy',
         ];
     }
 
