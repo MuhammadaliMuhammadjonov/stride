@@ -98,6 +98,9 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Title</th>
+                        <th>Text</th>
+                        <th>Link</th>
                         <th>Settings</th>
 
                     </tr>
@@ -107,7 +110,10 @@
                     @foreach ( $menuos as $key => $menu )
                         <tr>
                             <td>{{ $key+1 }}</td>													 
-                            <td>{{ $menu->name }}</td>													 
+                            <td>{{ $menu->name }}</td>	
+                            <td>{{$menu->title}}</td>
+                            <td>{{$menu->text}}</td>
+                            <td>{{$menu->link}}</td>												 
                             <td> 
                                 
 
@@ -125,23 +131,60 @@
                                     </span>
                                 </a>
 
-                                
-                                <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3">
-                                    <span class="svg-icon svg-icon-danger    svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="0" y="0" width="24" height="24"/>
-                                            <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"/>
-                                            <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
-                                        </g>
-                                    </svg><!--end::Svg Icon--></span>
+                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalLong">
+                                    <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3">
+                                        <span class="svg-icon svg-icon-danger    svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"/>
+                                                <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"/>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span>
+                                    </a>
+                                </button>
+                                <div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">O'chirish</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Section ma'lumotlarini aniq o'chirmoqchimisiz?
+                                            </div>
+                                            <div class="modal-footer">
+                                            <form action="{{ route('menu.destroy' , ['id' => $menu->id]) }}" method="get">
+                                                                    <!-- @csrf -->
+                                                <input type="hidden" value="{{$menu->id}}" name='delete'>
+                                                <button type="button" class="btn btn-light-danger font-weight-bold" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger font-weight-bold">Delete</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-
+                                <a href="{{route('menu.show', ['id' => $menu->id])}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Clothes\Sun-glasses.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon points="0 0 24 0 24 24 0 24"/>
+        <path d="M9.89442719,16.9422697 L8.10557281,16.0478425 C9.18098918,13.8970098 11.7963808,13.0252125 13.9472136,14.1006289 C14.7898516,14.5219479 15.4731082,15.2052045 15.8944272,16.0478425 L14.1055728,16.9422697 C13.8777812,16.4866865 13.5083696,16.1172749 13.0527864,15.8894833 C11.8899107,15.3080454 10.4758651,15.7793939 9.89442719,16.9422697 Z M21.9058667,8.11925961 C22.4393328,8.26220142 22.7559153,8.81053838 22.6129734,9.34400448 L20.9657703,15.4914504 C20.8228285,16.0249165 20.2744915,16.341499 19.7410254,16.1985572 C19.2075593,16.0556153 18.8909768,15.5072784 19.0339186,14.9738123 L20.6811218,8.82636639 C20.8240636,8.29290029 21.3724006,7.9763178 21.9058667,8.11925961 Z M2.09413334,8.11925961 C2.62759945,7.9763178 3.1759364,8.29290029 3.31887821,8.82636639 L4.87179248,14.6219213 C5.0147343,15.1553875 4.69815181,15.7037244 4.1646857,15.8466662 C3.6312196,15.989608 3.08288264,15.6730255 2.93994083,15.1395594 L1.38702656,9.34400448 C1.24408475,8.81053838 1.56066724,8.26220142 2.09413334,8.11925961 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+        <path d="M6.5,20 C4.01471863,20 2,17.9852814 2,15.5 C2,13.0147186 4.01471863,11 6.5,11 C8.98528137,11 11,13.0147186 11,15.5 C11,17.9852814 8.98528137,20 6.5,20 Z M17.5,20 C15.0147186,20 13,17.9852814 13,15.5 C13,13.0147186 15.0147186,11 17.5,11 C19.9852814,11 22,13.0147186 22,15.5 C22,17.9852814 19.9852814,20 17.5,20 Z" fill="#000000"/>
+    </g>
+</svg><!--end::Svg Icon--></span>
+                            </a>
                             </td>													 
                         </tr>
                     @endforeach
                    
                 </tbody>
             </table>
+
+<!-- Button trigger modal-->
+
+<!-- Modal-->
             <!--end: Datatable-->
         </div>
     </div>
@@ -149,3 +192,5 @@
 </div>
 
 @include('Admin.app.footer')
+
+

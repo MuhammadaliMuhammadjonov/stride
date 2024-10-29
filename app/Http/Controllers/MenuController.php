@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuRequest;
+use App\Http\Requests\AddtionRequest;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Random\Engine\Secure;
+
+// use App\Models\Section;
+// use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -42,9 +47,18 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        // Section modelidan ID ga teng ma'lumotni olish
+        $section = Section::find($request->id);
+    
+        // Agar model topilmasa, 404 xatolik qaytaramiz
+        if (!$section) {
+            return response()->json(['message' => 'Section not found'], 404);
+        }
+    
+        // Section ma'lumotlarini yuborib, sahifaga o'tamiz
+        return view('Admin.pages.Menu.addtion', compact('section'));
     }
 
     /**
@@ -69,11 +83,23 @@ class MenuController extends Controller
         return $this->index();
     }
 
+    public function updateAddtion(AddtionRequest $request) 
+    {
+        $menu = Section::find($request->id);
+        $menu->title = $request->title;
+        $menu->text = $request->text;
+        $menu->link = $request->link;
+        $menu->save();
+        return $this->index();
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Section::destroy($id);
+    return $this->index();
+
     }
 }
