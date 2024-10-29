@@ -19,7 +19,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menuos = Section::all();
+        $menuos = Section::orderBy('updated_at', 'desc')
+            ->get();
+
         return view('Admin.pages.Menu.menu', compact('menuos') );
     }
 
@@ -39,6 +41,11 @@ class MenuController extends Controller
 
         $newMenu = new Section();
         $newMenu->name = $request->name;
+
+        $newMenu->title = 'saqlanmagan';
+        $newMenu->text =  'saqlanmagan';
+        $newMenu->link =  'saqlanmagan';
+
         $newMenu->save();
 
         return $this->index();
@@ -85,11 +92,31 @@ class MenuController extends Controller
 
     public function updateAddtion(AddtionRequest $request) 
     {
-        $menu = Section::find($request->id);
-        $menu->title = $request->title;
-        $menu->text = $request->text;
-        $menu->link = $request->link;
+        $menu =  Section::find($request->id);
+
+        if ($menu->is_section == 1) {
+            return "Bu section allaqachon saqlangan";
+        }
+
+        $menu->title = $request->title ?? '---';
+        $menu->text = $request->text ?? '---';
+        $menu->link = $request->link ?? '---';
+        $menu->is_section = 1;
+        
+        if ($request->hasFile('image')) {
+            $paths = [];
+            $images = $request->file('image');
+            foreach ($images as $image){
+                $path = $image->store('images', 'public'); // 'images' papkasi ichiga saqlaydi
+                array_push($paths, $path);
+            }
+
+            $menu->image = json_encode($paths);
+        }
+      
+
         $menu->save();
+        
         return $this->index();
     }
 

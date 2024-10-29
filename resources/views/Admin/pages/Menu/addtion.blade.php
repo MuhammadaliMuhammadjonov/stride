@@ -15,13 +15,17 @@
                     <p class='card-title'>Oxirgi marta {{$section->updated_at}}da yangilandi</p>
                 </div>
                 <!--begin::Form-->
-                <form action="{{route('menu.addtion')}}" method="GET" >
-                    <!-- @csrf -->
+                <form action="{{route('menu.addtion')}}" method="POST" enctype="multipart/form-data" >
+                    @csrf
                     <div class="card-body">
 
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="email" value="{{$section->name}}" class="form-control" disabled="disabled" placeholder="Disabled input">
+                            <input type="text" value="{{$section->name}}" class="form-control" disabled="disabled" placeholder="Disabled input">
+                            
+                            <label class="mt-2">Rasm</label>
+
+                            <input  class="form-control" multiple type="file" name="image[]" accept="image/png, image/gif, image/jpeg" >
 
                             <input type="hidden" value="{{$section->id}}" name='id'>
 

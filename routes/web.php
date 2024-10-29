@@ -36,6 +36,6 @@ Route::get( '/admin1', function(){
     Route::post( '/menu/update', [MenuController::class, 'update'])->name('menu.update');
     Route::get( '/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::get('/menu/delete/{id}' , [MenuController::class, 'destroy'])->name('menu.destroy');
-    Route::get('/menu/addtion' , [MenuController::class , 'updateAddtion' ])->name('menu.addtion');
+    Route::post('/menu/addtion' , [MenuController::class , 'updateAddtion' ])->name('menu.addtion');
     Route::get('/menu/show/{id}' , [MenuController::class , 'show' ])->name('menu.show');
 

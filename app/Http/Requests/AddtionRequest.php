@@ -25,9 +25,11 @@ class AddtionRequest extends FormRequest
     {
         return [
             // 'name' => 'required|string', // name maydoni uchun talablar qo'shildi
-            'text' => 'required|string',
-            'title' => 'required|string',
-            'link' => 'required|string'
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
+            'image' => 'nullable',
+            'text' => 'nullable|string',
+            'title' => 'nullable|string',
+            'link' => 'nullable|string'
         ];
     }
 
@@ -35,9 +37,9 @@ class AddtionRequest extends FormRequest
     {
         return [
             // 'name.required' => 'Menu nomi majburiy',
-            'text.required' => 'Text majburiy',
-            'title.required' => 'Title majburiy',
-            'link.required' => 'Link majburiy'
+            'text.string' => 'Text majburiy',
+            'title.string' => 'Title majburiy',
+            'link.string' => 'Link majburiy'
         ];
     }
 
