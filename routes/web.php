@@ -25,7 +25,9 @@ Route::get( '/admin1', function(){
     return view('Admin.pages.index');
 });
 
-
+Route::get('/menu/section', function() {
+    return view('Admin.pages.Menu.section');
+});
 
 // Admin panel routes
 
@@ -37,5 +39,7 @@ Route::get( '/admin1', function(){
     Route::get( '/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::get('/menu/delete/{id}' , [MenuController::class, 'destroy'])->name('menu.destroy');
     Route::post('/menu/addtion' , [MenuController::class , 'updateAddtion' ])->name('menu.addtion');
+    Route::post('/menu/updateSec' , [MenuController::class , 'updateSection'])->name('menu.sectionUpdt');
     Route::get('/menu/show/{id}' , [MenuController::class , 'show' ])->name('menu.show');
+    Route::get('/menu/section/{id}' , [MenuController::class , 'showSection' ])->name('menu.section');
 
