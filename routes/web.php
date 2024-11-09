@@ -26,7 +26,13 @@ Route::get( '/admin1', function(){
     return view('Admin.pages.index');
 });
 
+<<<<<<< HEAD
 Route::get( '/test', [TestController::class, 'longestCommonPrefix']);
+=======
+Route::get('/menu/section', function() {
+    return view('Admin.pages.Menu.section');
+});
+>>>>>>> 52b95e3f2714bdb8de9c8bad80f8d9db1f640c06
 
 // Admin panel routes
 
@@ -38,5 +44,7 @@ Route::get( '/test', [TestController::class, 'longestCommonPrefix']);
     Route::get( '/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::get('/menu/delete/{id}' , [MenuController::class, 'destroy'])->name('menu.destroy');
     Route::post('/menu/addtion' , [MenuController::class , 'updateAddtion' ])->name('menu.addtion');
+    Route::post('/menu/updateSec' , [MenuController::class , 'updateSection'])->name('menu.sectionUpdt');
     Route::get('/menu/show/{id}' , [MenuController::class , 'show' ])->name('menu.show');
+    Route::get('/menu/section/{id}' , [MenuController::class , 'showSection' ])->name('menu.section');
 
