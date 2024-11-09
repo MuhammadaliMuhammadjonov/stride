@@ -26,16 +26,12 @@ Route::get( '/admin1', function(){
     return view('Admin.pages.index');
 });
 
-<<<<<<< HEAD
 Route::get( '/test', [TestController::class, 'longestCommonPrefix']);
-=======
 Route::get('/menu/section', function() {
     return view('Admin.pages.Menu.section');
 });
->>>>>>> 52b95e3f2714bdb8de9c8bad80f8d9db1f640c06
 
 // Admin panel routes
-
     // Menu 
     Route::get( '/menu', [MenuController::class, 'index'])->name('menu');
     Route::get( '/menu/create', [MenuController::class, 'create'])->name('menu.create');
