@@ -74,6 +74,9 @@ class MenuController extends Controller
         // Section modelidan ID ga teng ma'lumotni olish
         $section = Section::find($request->id);
         
+        $menuos = Section::orderBy('updated_at', 'desc')
+            ->get();
+
         $image = json_decode($section->image, true);
         // Agar model topilmasa, 404 xatolik qaytaramiz
         if (!$section) {
@@ -81,7 +84,7 @@ class MenuController extends Controller
         }
     
         // Section ma'lumotlarini yuborib, sahifaga o'tamiz
-        return view('Admin.pages.Menu.section', compact('section' , 'image'));
+        return view('Admin.pages.Menu.section', compact('section' , 'image' , 'menuos'));
     }
 
     public function updateSection(UpdateSecRequest $request) 
