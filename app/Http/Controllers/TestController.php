@@ -26,7 +26,6 @@ class TestController extends Controller
     public function longestCommonPrefix( $strs = ["a","ac"]) {
             
             $bufer = '';
-            
 
             if (count($strs) == 1) {
                 return $strs[0];
@@ -132,5 +131,66 @@ class TestController extends Controller
 
     public function lengthOfLastWord($s) {
         
+    }
+
+
+    // success
+    public function isBalanced($num = "24123") {
+        
+        # Juft sonlar
+        $result = [0,0];
+        foreach (str_split($num) as $key => $value) {
+
+            if ( ($key + 1) %2 == 0 ) {
+                # Juft son
+                $result[0] += $value;
+            }else{
+                # Toq son
+                $result[1] += $value;
+            }
+
+        }
+
+        return $result[0] == $result[1];
+    }
+
+    // https://leetcode.com/problems/find-the-original-typed-string-i/
+    public function possibleStringCount($word = "abbcccc") {
+        $words = str_split($word);
+        $results = [];
+
+        foreach ($words as $key => $value) {
+            // $value = a
+            if ($key > 0 && $words[$key-1] == $value) {
+                $amount = 1; 
+
+                if (isset($results[$value])) {
+                    $amount = $results[$value];
+                }
+
+                $results[$value] = $amount + 1; 
+            }
+
+        }
+        $number = 0;
+        $index = 0;
+        foreach ($results as $key => $value) {
+            $index +=1;
+            
+            if ( count($results) == $index ) {
+                $number += $value;
+            }else{
+                $number = $number + ( $value - 1 );
+            }
+            
+
+        }
+
+        if ($number > 0) {
+            return $number;
+        }else{
+            return 1;
+        }
+      
     }
 }
