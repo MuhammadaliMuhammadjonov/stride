@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +26,7 @@ Route::get( '/admin1', function(){
     return view('Admin.pages.index');
 });
 
-Route::get('/menu/section', function() {
-    return view('Admin.pages.Menu.section');
-});
+Route::get( '/test', [TestController::class, 'longestCommonPrefix']);
 
 // Admin panel routes
 
