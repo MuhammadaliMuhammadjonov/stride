@@ -110,10 +110,10 @@
                     @foreach ( $menuos as $key => $menu )
                         <tr>
                             <td>{{ $key+1 }}</td>													 
-                            <td>{{ $menu->name }}</td>	
-                            <td>{{$menu->title}}</td>
-                            <td>{{$menu->text}}</td>
-                            <td>{{$menu->link}}</td>												 
+                            <td>{{ $menu->name  }}</td>	
+                            <td>{{$menu->title ?? 'yoq' }}</td>
+                            <td>{{$menu->text ?? 'yoq' }}</td>
+                            <td>{{$menu->link ?? 'yoq'}}</td>												 
                             <td> 
                                 
 

@@ -31,7 +31,9 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('Admin.pages.Menu.create');
+        $menuos = Section::orderBy('updated_at', 'desc')
+        ->get();
+        return view('Admin.pages.Menu.create',  compact('menuos'));
     }
 
     /**
@@ -143,9 +145,9 @@ class MenuController extends Controller
             return "Bu section allaqachon saqlangan";
         }
 
-        $menu->title = $request->title ?? '---';
-        $menu->text = $request->text ?? '---';
-        $menu->link = $request->link ?? '---';
+        $menu->title = $request->title ?? null;
+        $menu->text = $request->text ?? null;
+        $menu->link = $request->link ?? null;
         $menu->is_section = 1;
         
         if ($request->hasFile('image')) {

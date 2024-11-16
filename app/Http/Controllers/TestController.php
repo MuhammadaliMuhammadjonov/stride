@@ -22,4 +22,43 @@ class TestController extends Controller
         
        return range(0 , $indexs);
     }
+
+    public function strStr($haystack = 'saadbutsad', $needle = 'saad' ) {
+        
+        $strs = str_split($haystack);
+        $needleArr = str_split($needle);
+
+        $str = '';
+        $index = '';
+        foreach( $strs as $key1 => $value ){
+
+            foreach($needleArr as $key => $value2){
+
+                if ($value == $value2) {
+                    # code...
+                }
+
+                if ($needle[strlen($str)] == $value) {
+                    $str = $str.$value;
+                    if ($key == 0) {
+                        echo $key1.'-'.$key.'/';
+                        $index = $key1;
+                    }
+                    break;
+                }else{
+                    $str = '';
+                    $index = -1;
+                }
+
+            }
+
+
+            if ($str == $needle) {
+                return $index;
+            }
+
+        }
+        return -1;
+
+    }
 }
