@@ -26,7 +26,7 @@ Route::get( '/admin1', function(){
     return view('Admin.pages.index');
 });
 
-Route::get( '/test', [TestController::class, 'longestCommonPrefix']);
+Route::get( '/test', [TestController::class, 'twoSum']);
 Route::get('/menu/section', function() {
     return view('Admin.pages.Menu.section');
 });
