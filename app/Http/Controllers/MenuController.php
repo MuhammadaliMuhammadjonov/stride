@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MenuRequest;
 use App\Http\Requests\AddtionRequest;
 use App\Http\Requests\UpdateSecRequest;
+use App\Models\Item;
+
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -75,7 +77,7 @@ class MenuController extends Controller
     {
         // Section modelidan ID ga teng ma'lumotni olish
         $section = Section::find($request->id);
-        
+        $items = Item::where('section_id', $request->id)->get();
         $menuos = Section::orderBy('updated_at', 'desc')
             ->get();
 
@@ -86,8 +88,89 @@ class MenuController extends Controller
         }
     
         // Section ma'lumotlarini yuborib, sahifaga o'tamiz
-        return view('Admin.pages.Menu.section', compact('section' , 'image' , 'menuos'));
+        return view('Admin.pages.Menu.section', compact('section' , 'image' , 'menuos' , 'items'));
     }
+
+    public function itemCreate(Request  $request)
+    {
+        $newItem = new Item();
+        $newItem->section_id = $request->section_id;
+
+        $newItem->title = $request->title;
+        $newItem->text = $request->text;
+        $newItem->link = $request->link;
+        if ($request->hasFile('image')) {
+            $paths = [];
+            $images = $request->file('image');
+            foreach ($images as $image){
+                $path = $image->store('images', 'public'); // 'images' papkasi ichiga saqlaydi
+                array_push($paths, $path);
+            }
+
+            $newItem->image = json_encode($paths);
+        }
+        
+        $newItem->description = $request->description;
+
+        $newItem->save();
+
+        $items = Item::where('section_id', $request->section_id)->get();
+        
+        return $this->index();
+
+        // return view('Admin.pages.Menu.addItem');
+        
+
+        // $menuos = Section::orderBy('updated_at', 'desc')
+        // ->get();
+        // return view('Admin.pages.Menu.create',  compact('menuos'));
+    }
+
+    public function formCreate(Request $request)
+    {
+        $id = $request->id;
+        return view('Admin.pages.Menu.addItem' , compact('id'));
+    }
+
+    public function itemEditshow(Request $request) {
+        $menu = Item::where('section_id', $request->route('slug'))
+             ->where('id', $request->route('id'))
+             ->first();
+             $section_id = $request->route('slug');
+
+
+            //  echo $menu;
+        return view('Admin.pages.Item.edit', compact('menu' , 'section_id'));
+    }
+
+    public function itemEdit(Request $request) {
+        $menu = Item::where('section_id', $request->route('slug'))
+        ->where('id', $request->route('id'))
+        ->first();
+        $menu->title = $request->title;
+        $menu->text = $request->text;
+        $menu->link = $request->link;
+        $menu->description = $request->description;
+        if ($request->hasFile('image')) {
+            $paths = [];
+            $images = $request->file('image');
+            foreach ($images as $image){
+                $path = $image->store('images', 'public'); // 'images' papkasi ichiga saqlaydi
+                array_push($paths, $path);
+            }
+
+            $menu->image = json_encode($paths);
+        }
+      
+        $menu->save();
+        return $this->index();
+
+    }
+
+    public function itemDestroy(Request $request) {
+        
+    }
+
 
     public function updateSection(UpdateSecRequest $request) 
     {
