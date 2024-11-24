@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $menuos = Section::all();
+        $home = Section::where('name', 'Home')->first();
+        $home['photo'] = $home['image'] != null ? asset('').'storage/'.json_decode($home['image'], true)[0] : '/' ;
+        
+        return view('home', compact('menuos', 'home'));
     }
 
 

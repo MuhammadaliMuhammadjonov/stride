@@ -91,6 +91,24 @@ class MenuController extends Controller
         return view('Admin.pages.Menu.section', compact('section' , 'image' , 'menuos' , 'items'));
     }
 
+    public function redirectSection($id)
+    {
+        // Section modelidan ID ga teng ma'lumotni olish
+        $section = Section::find($id);
+        $items = Item::where('section_id', $id)->get();
+        $menuos = Section::orderBy('updated_at', 'desc')
+            ->get();
+
+        $image = json_decode($section->image, true);
+        // Agar model topilmasa, 404 xatolik qaytaramiz
+        if (!$section) {
+            return response()->json(['message' => 'Section not found'], 404);
+        }
+    
+        // Section ma'lumotlarini yuborib, sahifaga o'tamiz
+        return view('Admin.pages.Menu.section', compact('section' , 'image' , 'menuos' , 'items'));
+    }
+
     public function itemCreate(Request  $request)
     {
         $newItem = new Item();
@@ -116,7 +134,8 @@ class MenuController extends Controller
 
         $items = Item::where('section_id', $request->section_id)->get();
         
-        return $this->index();
+        return $this->redirectSection($request->section_id);
+        // return $this->index();
 
         // return view('Admin.pages.Menu.addItem');
         
@@ -144,6 +163,7 @@ class MenuController extends Controller
     }
 
     public function itemEdit(Request $request) {
+
         $menu = Item::where('section_id', $request->route('slug'))
         ->where('id', $request->route('id'))
         ->first();
@@ -163,7 +183,8 @@ class MenuController extends Controller
         }
       
         $menu->save();
-        return $this->index();
+        return $this->redirectSection($menu->section_id);
+        // return $this->index();
 
     }
 
