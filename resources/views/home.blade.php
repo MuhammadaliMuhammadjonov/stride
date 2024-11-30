@@ -88,25 +88,30 @@
 
         <div class="py-vh-5 w-100 overflow-hidden" id="Services">
             <div class="container">
+              @if ($service != null)
+
+              <!-- {{$service}} -->
+
+                  <!-- {{$service_items}} -->
                 <div class="row d-flex justify-content-end">
                     <div class="col-lg-8" data-aos="fade-down">
-                        <h2 class="display-6">Okay, there are three really good reasons for us. There are no more than
-                            three, but we think three is a reasonable good number of good stuff.</h2>
+                        <h2 class="display-6">{{$service['title'] ?? 'Saqlanmagan'}}.</h2>
                     </div>
                 </div>
                 <div class="row d-flex align-items-center">
+                    @foreach ($service_items as $item)
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                        <span class="h5 fw-lighter">01.</span>
-                        <h3 class="py-5 border-top border-dark">We rented this fancy startup office in an old factory
-                            building.</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus culpa, voluptatibus ex
-                            itaque, sapiente a consequatur inventore beatae, ipsam debitis omnis consequuntur iste
-                            asperiores. Similique quisquam debitis corrupti deserunt, dolor.</p>
-                        <a href="#" class="link-fancy">Learn more
+
+                        <span class="h5 fw-lighter">{{$item->id}}</span>
+                        <h3 class="py-5 border-top border-dark">{{$item->title}}</h3>
+                        <p>{{$item->text}}</p>
+                        <a href="#" class="link-fancy">{{$item->link}}
                         </a>
                     </div>
 
-                    <div class="col-md-6 col-lg-4 py-vh-4 pb-0" data-aos="fade-up" data-aos-delay="400">
+                  @endforeach
+
+                    <!-- <div class="col-md-6 col-lg-4 py-vh-4 pb-0" data-aos="fade-up" data-aos-delay="400">
                         <span class="h5 fw-lighter">02.</span>
                         <h3 class="py-5 border-top border-dark">We don´t know exactly what we are doing. But thats good
                             because we can´t break something intentionally.</h3>
@@ -126,9 +131,9 @@
                             asperiores. Similique quisquam debitis corrupti deserunt, dolor.</p>
                         <a href="#" class="link-fancy">Learn more
                         </a>
-                    </div>
+                    </div> -->
                 </div>
-
+                @endif
             </div>
         </div>
 
@@ -139,35 +144,32 @@
                     <div class="col-lg-6">
                         <div class="row gx-5 d-flex">
                             <div class="col-md-11">
+                            <!-- {{$aboutus['photo']}} -->
                                 <div class="shadow ratio ratio-16x9 rounded bg-cover bp-center align-self-end"
                                     data-aos="fade-right"
-                                    style="background-image: url({{ asset('') }}assets/img/webp/people15.webp);--bs-aspect-ratio: 50%;">
+                                    style="background-image: url({{$aboutus['photo']}});--bs-aspect-ratio: 50%;">
                                 </div>
                             </div>
                             <div class="col-md-5 offset-md-1">
                                 <div class="shadow ratio ratio-1x1 rounded bg-cover mt-5 bp-center float-end"
                                     data-aos="fade-up"
-                                    style="background-image: url({{ asset('') }}assets/img/webp/interior42.webp);">
+                                    style="background-image: url({{$aboutus['photo']}});">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="col-12 shadow ratio rounded bg-cover mt-5 bp-center" data-aos="fade-left"
-                                    style="background-image: url({{ asset('') }}assets/img/webp/people4.webp);--bs-aspect-ratio: 150%;">
+                                    style="background-image: url({{$aboutus['photo']}});--bs-aspect-ratio: 150%;">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h3 class="py-5 border-top border-dark" data-aos="fade-left">We did some interesting stuff in
-                            our field of work. For example we collect a lot of these free photos and use them on our
-                            website.</h3>
-                        <p data-aos="fade-left" data-aos-delay="200">Donec id elit non mi porta gravida at eget metus.
-                            Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
-                            justo sit amet risus.
+                        <h3 class="py-5 border-top border-dark" data-aos="fade-left">{{$aboutus->title ?? 'Saqlanmagan'}}</h3>
+                        <p data-aos="fade-left" data-aos-delay="200">{{$aboutus->text ?? 'Saqlanmagan'}}
                         </p>
                         <p>
                             <a href="#" class="link-fancy link-dark" data-aos="fade-left"
-                                data-aos-delay="400">Learn more
+                                data-aos-delay="400">{{$aboutus->link}}
                             </a>
                         </p>
                     </div>
@@ -185,23 +187,22 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="display-6 mb-5" data-aos="fade-down">There are some important numbers for
-                                    us. They are just numbers without any meaning, but we just love them.</h2>
+                                <h2 class="display-6 mb-5" data-aos="fade-down">{{$numbers->title ?? 'Saqlanmagan'}}</h2>
                             </div>
+                    @foreach ($number_items as $item)
                             <div class="col-lg-6" data-aos="fade-up">
-                                <div class="display-1 fw-bold py-4">42%</div>
-                                <p class="text-black-50">Donec id elit non mi porta gravida at eget metus. Fusce
-                                    dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                    massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
-                                    sed odio dui.</p>
+                                <div style='font-size:34px;' class="display-1 fw-bold py-2">{{$item->title}}</div>
+                                <p class="text-black-50">{{$item->text}}</p>
+                                <!-- <p class='text-black-50'>{{$item->description}}</p> -->
                             </div>
-                            <div class="col-lg-6" data-aos="fade-up">
+                            @endforeach
+                            <!-- <div class="col-lg-6" data-aos="fade-up">
                                 <div class="display-1 fw-bold py-4">+300</div>
                                 <p class="text-black-50">Donec id elit non mi porta gravida at eget metus. Fusce
                                     dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
                                     massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
                                     sed odio dui.</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -214,35 +215,38 @@
                 <div class="row overflow-scroll">
                     <div class="col-12">
                         <div class="row vw-100 px-0 py-vh-5 d-flex align-items-center scrollx">
-                            <div class="col-md-2" data-aos="fade-up">
-                                <img src="{{ asset('') }}assets/img/webp/interior37.webp"
-                                    class="rounded shadow img-fluid" alt="nice gallery image" width="512"
-                                    height="341">
-                            </div>
+                        @if(isset($gallery['photo']) && $gallery['photo'])
+    <div class="col-md-2" data-aos="fade-up">
+        <img src="{{ $gallery['photo'] }}"
+            class="rounded shadow img-fluid" alt="nice gallery image" width="512" height="341">
+    </div>
 
-                            <div class="col-md-2" data-aos="fade-up" data-aos-delay="200">
-                                <img src="{{ asset('') }}assets/img/webp/people1.webp"
-                                    class="img-fluid rounded shadow" alt="nice gallery image" width="1164"
-                                    height="776">
-                            </div>
+    <div class="col-md-2" data-aos="fade-up" data-aos-delay="200">
+        <img src="{{ $gallery['photo'] }}"
+            class="img-fluid rounded shadow" alt="nice gallery image" width="1164" height="776">
+    </div>
 
-                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                                <img src="{{ asset('') }}assets/img/webp/people2.webp"
-                                    class="img-fluid rounded shadow" alt="nice gallery image" width="844"
-                                    height="1054">
-                            </div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+        <img src="{{ $gallery['photo'] }}"
+            class="img-fluid rounded shadow" alt="nice gallery image" width="844" height="1054">
+    </div>
 
-                            <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
-                                <img src="{{ asset('') }}assets/img/webp/interior29.webp"
-                                    class="img-fluid rounded shadow" alt="nice gallery image" width="844"
-                                    height="562">
-                            </div>
+    <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
+        <img src="{{ $gallery['photo'] }}"
+            class="img-fluid rounded shadow" alt="nice gallery image" width="844" height="562">
+    </div>
 
-                            <div class="col-md-2" data-aos="fade-up" data-aos-delay="800">
-                                <img src="{{ asset('') }}assets/img/webp/people23.webp"
-                                    class="rounded shadow img-fluid" alt="nice gallery image" width="512"
-                                    height="341">
-                            </div>
+    <div class="col-md-2" data-aos="fade-up" data-aos-delay="800">
+        <img src="{{ $gallery['photo'] }}"    
+            class="rounded shadow img-fluid" alt="nice gallery image" width="512" height="341">
+    </div>
+@else
+    <div class="col-md-12 text-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7Lt6V-hg4IZ3WJcf0-VHwp9-SCzZ3u-PNw&s"
+            class="img-fluid rounded shadow" alt="default gallery image">
+    </div>
+@endif
+
                         </div>
                     </div>
                 </div>
