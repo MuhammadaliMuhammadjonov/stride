@@ -145,22 +145,33 @@
                         <div class="row gx-5 d-flex">
                             <div class="col-md-11">
                             <!-- {{$aboutus['photo']}} -->
-                                <div class="shadow ratio ratio-16x9 rounded bg-cover bp-center align-self-end"
-                                    data-aos="fade-right"
-                                    style="background-image: url({{$aboutus['photo']}});--bs-aspect-ratio: 50%;">
-                                </div>
-                            </div>
-                            <div class="col-md-5 offset-md-1">
-                                <div class="shadow ratio ratio-1x1 rounded bg-cover mt-5 bp-center float-end"
-                                    data-aos="fade-up"
-                                    style="background-image: url({{$aboutus['photo']}});">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="col-12 shadow ratio rounded bg-cover mt-5 bp-center" data-aos="fade-left"
-                                    style="background-image: url({{$aboutus['photo']}});--bs-aspect-ratio: 150%;">
-                                </div>
-                            </div>
+                        @if(isset($aboutus_image))
+
+                        @if(isset($aboutus_image) && isset($aboutus_image[0]))
+    <div class="shadow ratio ratio-16x9 rounded bg-cover bp-center align-self-end"
+        data-aos="fade-right"
+        style="background-image: url({{ asset('') . 'storage/' . $aboutus_image[0] }});--bs-aspect-ratio: 50%;">
+    </div>
+@endif
+
+@if(isset($aboutus_image) && isset($aboutus_image[1]))
+    <div class="col-md-5 offset-md-1">
+        <div class="shadow ratio ratio-1x1 rounded bg-cover mt-5 bp-center float-end"
+            data-aos="fade-up"
+            style="background-image: url({{ asset('') . 'storage/' . $aboutus_image[1] }});">
+        </div>
+    </div>
+@endif
+
+@if(isset($aboutus_image) && isset($aboutus_image[2]))
+    <div class="col-md-6">
+        <div class="col-12 shadow ratio rounded bg-cover mt-5 bp-center" data-aos="fade-left"
+            style="background-image: url({{ asset('') . 'storage/' . $aboutus_image[2] }});--bs-aspect-ratio: 100%;">
+        </div>
+    </div>
+@endif
+
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -169,7 +180,7 @@
                         </p>
                         <p>
                             <a href="#" class="link-fancy link-dark" data-aos="fade-left"
-                                data-aos-delay="400">{{$aboutus->link}}
+                                data-aos-delay="400">{{$aboutus->link ?? 'Saqlanmagan'}}
                             </a>
                         </p>
                     </div>
@@ -215,31 +226,45 @@
                 <div class="row overflow-scroll">
                     <div class="col-12">
                         <div class="row vw-100 px-0 py-vh-5 d-flex align-items-center scrollx">
-                        @if(isset($gallery['photo']) && $gallery['photo'])
+                        @if(isset($gallery_image))
+
+        @if(isset($gallery_image) && isset($gallery_image[0]))
     <div class="col-md-2" data-aos="fade-up">
-        <img src="{{ $gallery['photo'] }}"
+        <img src="{{asset('').'storage/'.$gallery_image[0]}}"
             class="rounded shadow img-fluid" alt="nice gallery image" width="512" height="341">
     </div>
+    @endif
 
+    @if(isset($gallery_image) && isset($gallery_image[1]))
     <div class="col-md-2" data-aos="fade-up" data-aos-delay="200">
-        <img src="{{ $gallery['photo'] }}"
+        <img src="{{asset('').'storage/'.$gallery_image[1]}}"
             class="img-fluid rounded shadow" alt="nice gallery image" width="1164" height="776">
     </div>
+    @endif
+
+    @if(isset($gallery_image) && isset($gallery_image[2]))
 
     <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-        <img src="{{ $gallery['photo'] }}"
+        <img src="{{asset('').'storage/'.$gallery_image[2]}}"
             class="img-fluid rounded shadow" alt="nice gallery image" width="844" height="1054">
     </div>
 
+    @endif
+
+    @if(isset($gallery_image) && isset($gallery_image[3]))
+
     <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
-        <img src="{{ $gallery['photo'] }}"
+        <img src="{{asset('').'storage/'.$gallery_image[3]}}"
             class="img-fluid rounded shadow" alt="nice gallery image" width="844" height="562">
     </div>
-
+    @endif
+    @if(isset($gallery_image) && isset($gallery_image[4]))
     <div class="col-md-2" data-aos="fade-up" data-aos-delay="800">
-        <img src="{{ $gallery['photo'] }}"    
+        <img src="{{ asset('') . 'storage/' . $gallery_image[4] }}"
             class="rounded shadow img-fluid" alt="nice gallery image" width="512" height="341">
     </div>
+@endif
+
 @else
     <div class="col-md-12 text-center">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7Lt6V-hg4IZ3WJcf0-VHwp9-SCzZ3u-PNw&s"
@@ -261,15 +286,17 @@
                 </div>
                 <div class="col-md-7" data-aos="fade-left">
                     <blockquote>
-                        <div class="fs-4 my-3 fw-light pt-4 border-bottom pb-3">“I´am the CEO of this company. So maybe
-                            you think "he will tell us something super awesome about it only". But no. Its a really
-                            strange place to work with creepy people all around.
-                            They do some computer stuff I don´t understand. But I wear expensive Glasses and a Patagonia
-                            Hoodie. So I´am fine with it.”</div>
-                        <img src="{{ asset('') }}assets/img/webp/person11.webp" width="64" height="64"
+                        <div class="fs-4 my-3 fw-light pt-4 border-bottom pb-3">“I´am the CEO of this company. So maybe you think "he will tell us something super awesome about it only". But no. Its a really strange place to work with creepy people all around. They do some computer stuff I don´t understand. But I wear expensive Glasses and a Patagonia Hoodie. So I´am fine with it.”</div>
+    @if(isset($work['image']))
+                        <img src="{{$work['photo']}}" width="64" height="64"
                             class="img-fluid rounded-circle me-3" alt="" data-aos="fade">
-                        <span><span class="fw-bold">John Doe,</span>
-                            CEO of Stride Ltd.</span>
+    
+                            @else
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd7Lt6V-hg4IZ3WJcf0-VHwp9-SCzZ3u-PNw&s" width="64" height="64"
+                            class="img-fluid rounded-circle me-3" alt="" data-aos="fade">
+                            @endif
+                        <span><span class="fw-bold">John Doe</span>
+                        CEO of Stride Ltd.</span>
                     </blockquote>
                 </div>
 
@@ -281,14 +308,12 @@
                 <div class="row d-flex justify-content-center">
                     <div class="row d-flex justify-content-center text-center">
                         <div class="col-lg-8 text-center" data-aos="fade">
-                            <p class="text-secondary lead">Let´s start a project together!</p>
-                            <h2 class="display-6 mb-5">Hell no! This button is linked to a none working contact form. A
-                                none working form without any user feedback. So you might think you done something
-                                wrong. But in reality we just don´t want to start anything with you or anyone else.</h2>
+                            <p class="text-secondary lead">{{$work->title ?? 'Saqlanmagan'}}</p>
+                            <h2 class="display-6 mb-5">{{$work->text ?? 'Saqlanmagan'}}</h2>
                         </div>
                         <div class="col-12">
                             <a href="#" class="btn btn-warning btn-xl shadow me-3 mt-4"
-                                data-aos="fade-down">Get in contact</a>
+                                data-aos="fade-down">{{$work->link ?? 'Saqlanmagan'}}</a>
                         </div>
                     </div>
 
@@ -300,13 +325,14 @@
             <div class="container py-vh-6">
                 <div class="row d-flex justify-content-center">
                     <div class="col-12 col-lg-10 col-xl-8 text-center">
-                        <h2 class="display-6">Loved by people all around the globe</h2>
-                        <p class="lead">Our spaces and offices are soooooo lovely, no one would give us a negative
-                            rating! And look at these trustworthy avatar pictures! Trust us!</p>
+                        <h2 class="display-6">{{$testimonials->title}}</h2>
+                        <p class="lead">{{$testimonials->text}}</p>
                     </div>
                     <div class="col-12 mt-4">
                         <div class="row row-cols-1 row-cols-md-2 g-5 d-flex align-items-center">
-
+                            <!-- {{$testimonials_items}} -->
+                    @foreach ($testimonials_items as $item)
+{{$item['image'][0]}}
                             <div class="col-12 col-lg-6 col-xl-4" data-aos="fade-right">
                                 <div class="card p-4 mt-3 border-0">
                                     <div class="card-body">
@@ -342,279 +368,23 @@
                                             </svg>
                                         </div>
                                         <blockquote class="blockquote">
-                                            <p>"That service is really really good. And I don´t say that because they
-                                                pay me a lot of money. I say that because they don´t pay me more money
-                                                anymore if I don´t say it..."</p>
+                                            <p>{{$item->description}}</p>
                                         </blockquote>
                                         <div class="d-flex justify-content-between border-top pt-3">
                                             <div>
-                                                <span class="h6 fw-5">Jane Doemunsky</span><br>
-                                                <small class="text-muted">COO, The Boo Corp.</small>
+                                                <span class="h6 fw-5">{{$item->title}}</span><br>
+                                                <small class="text-muted">{{$item->text}}</small>
                                             </div>
-                                            <img src="{{ asset('') }}assets/img/webp/person9.webp" width="48"
+                                
+                                            <img src="{{ asset('').'storage/'.str_replace('\/', '/', $item['image'][0]) }}" width="48"
                                                 height="48" class="rounded-circle" alt=""
                                                 data-aos="fade">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
 
-                            <div class="col-12 col-lg-6 col-xl-4">
-                                <div class="card p-4 shadow mt-3 border-0" data-aos="fade-down">
-                                    <div class="card-body">
-                                        <div class="text-dark py-2 fs-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor"
-                                                class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                            </svg>
-                                        </div>
-                                        <blockquote class="blockquote">
-                                            <p>"I really don´t get what they do. Something with Crypto, NFT´s, SaaS and
-                                                Cyber Security. Maybe an App for Kids...? But they have this nice
-                                                website...so who cares what they do as long as they are good at it."</p>
-                                        </blockquote>
-                                        <div class="d-flex justify-content-between border-top pt-3">
-                                            <p class="card-text">
-                                                <span class="h6 fw-5">Jenny Matrix</span><br>
-                                                <small class="text-muted">Daughter of Col. John Matrix,
-                                                    Commando.</small>
-                                            </p>
-                                            <img src="{{ asset('') }}assets/img/webp/person3.webp" width="48"
-                                                height="48" class="rounded-circle" alt=""
-                                                data-aos="fade">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-4">
-                                <div class="card p-4 mt-3 border-0" data-aos="fade-left">
-                                    <div class="card-body">
-                                        <div class="text-dark py-2 fs-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor"
-                                                class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                            </svg>
-                                        </div>
-                                        <blockquote class="blockquote">
-                                            <p>"I don´t know if they are good at what they do. But they have nice coffee
-                                                and a shiny brand new startup office with bikes on the wall and all that
-                                                stuff."</p>
-                                        </blockquote>
-                                        <div class="d-flex justify-content-between border-top pt-3">
-                                            <p class="card-text">
-                                                <span class="h6 fw-5">Rustin Cohle</span><br>
-                                                <small class="text-muted">Detective, Somewhere in the swamps</small>
-                                            </p>
-                                            <img src="{{ asset('') }}assets/img/webp/person8.webp" width="48"
-                                                height="48" class="rounded-circle" alt=""
-                                                data-aos="fade">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-4">
-                                <div class="card p-4 mt-3 border-0" data-aos="fade-right">
-                                    <div class="card-body">
-                                        <div class="text-dark py-2 fs-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor"
-                                                class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
-                                            </svg>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                                            </svg>
-                                        </div>
-                                        <blockquote class="blockquote">
-                                            <p>"Its not good at all but I give it five stars because I killed
-                                                (accidentally) the CEO´s cat with a lawnmover."</p>
-                                        </blockquote>
-                                        <div class="d-flex justify-content-between border-top pt-3">
-                                            <p class="card-text">
-                                                <span class="h6 fw-5">Richard Thornburg</span><br>
-                                                <small class="text-muted">News Reporter, KFLW-TV</small>
-                                            </p>
-                                            <img src="{{ asset('') }}assets/img/webp/person14.webp"
-                                                width="48" height="48" class="rounded-circle" alt=""
-                                                data-aos="fade">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-4">
-                                <div class="card p-4 mt-3 border-0" data-aos="fade-up">
-                                    <div class="card-body">
-                                        <div class="text-dark py-2 fs-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor"
-                                                class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-half" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
-                                            </svg>
-                                        </div>
-                                        <blockquote class="blockquote">
-                                            <p>"I´am just a guy who uploads his picture to unsplash.com so that others
-                                                can use me as placeholder for stupid sample avatars. I don´t even know
-                                                that my face is on this website."</p>
-                                        </blockquote>
-                                        <div class="d-flex justify-content-between border-top pt-3">
-                                            <p class="card-text">
-                                                <span class="h6 fw-5">Harry Walters</span><br>
-                                                <small class="text-muted">Gangster, In Bruges</small>
-                                            </p>
-                                            <img src="{{ asset('') }}assets/img/webp/person13.webp"
-                                                width="48" height="48" class="rounded-circle" alt=""
-                                                data-aos="fade">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6 col-xl-4">
-                                <div class="card p-4 shadow mt-3 border-0" data-aos="fade-left">
-                                    <div class="card-body">
-                                        <div class="text-dark py-2 fs-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="16" height="16" fill="currentColor"
-                                                class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-
-                                        </div>
-                                        <blockquote class="blockquote">
-                                            <p>"Okay, okay, I give it five stars. But do you know what: There is a
-                                                infinit number of stars out there. So five means nothing."</p>
-                                        </blockquote>
-                                        <div class="d-flex justify-content-between border-top pt-3">
-                                            <p class="card-text">
-                                                <span class="h6 fw-5">Lizzie Stark</span><br>
-                                                <small class="text-muted">Head of Security, Brummagem Boys</small>
-                                            </p>
-                                            <img src="{{ asset('') }}assets/img/webp/person18.webp"
-                                                width="48" height="48" class="rounded-circle" alt=""
-                                                data-aos="fade">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

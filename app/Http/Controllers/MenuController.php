@@ -189,7 +189,15 @@ class MenuController extends Controller
     }
 
     public function itemDestroy(Request $request) {
-        
+        $item = Item::where('section_id', $request->slug)->where('id', $request->id)->first();
+
+        if ($item) {
+            $item->delete();
+            return $this->redirectSection($request->slug);
+            // return response()->json(['message' => 'Element muvaffaqiyatli o‘chirildi.'], 200);
+        }
+    
+        // return response()->json(['message' => 'Element topilmadi.'], 404);   
     }
 
 

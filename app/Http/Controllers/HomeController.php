@@ -22,11 +22,13 @@ class HomeController extends Controller
         $service = Section::where('name', 'Service')->first();
         $aboutus = Section::where('name' , 'Aboutus')->first();
         $aboutus['photo'] = $aboutus['image'] != null ? asset('').'storage/'.json_decode($aboutus['image'], true)[0] : '/' ;
+       $aboutus_image = json_decode($aboutus['image'] , true);
 
         $numbers = Section::where('name', 'Numbers')->first();
 
         $gallery = Section::where('name', 'Gallery')->first();
-        $gallery['photo'] = $gallery['image'] != null ? asset('').'storage/'.json_decode($gallery['image'], true)[0] : '/' ;
+        $gallery_image = json_decode($gallery['image'] , true);
+        // $gallery['photo'] = $gallery['image'] != null ? asset('').'storage/'.json_decode($gallery['image'], true)[0] : '/' ;
         if (!$numbers) {
             return view('home', compact('menuos', 'home'))->with('error', 'Service bo\'limi topilmadi.');
         }
@@ -39,9 +41,19 @@ if (!$service) {
 
 $service_items = Item::where('section_id', $service->id)->get();
 
+    $work = Section::where('name', 'Work')->first();
+    $work['photo'] = $work['image'] != null ? asset('').'storage/'.json_decode($work['image'], true)[0] : '/' ;
 
+    $testimonials = Section::where('name', 'Testimonials')->first();
+    if (!$testimonials) {
+        return view('home', compact('menuos', 'home'))->with('error', 'Service bo\'limi topilmadi.');
+    }
+    
+    $testimonials_items = Item::where('section_id', $testimonials->id)->get();
+    
 
-return view('home', compact('menuos', 'home', 'service', 'service_items' , 'aboutus' , 'numbers' , 'number_items' , 'gallery'));
+return view('home', compact('menuos', 'home', 'service', 'service_items' , 'aboutus' , 'numbers' , 'number_items' , 'gallery' , 'aboutus_image' , 'gallery_image' , 'work'
+, 'testimonials' , 'testimonials_items'));
 }
 
 

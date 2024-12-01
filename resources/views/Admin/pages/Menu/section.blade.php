@@ -23,12 +23,12 @@
 							<label>Name</label>
 							<input type="text" value="{{ $section->name }}" class="form-control"
 								placeholder="Disabled input" name="name">
-							@if ($section->image)
+
 								<label class="mt-2">Rasm</label>
 	
 								<input class="form-control" multiple type="file" name="image[]"
 									accept="image/png, image/gif, image/jpeg">
-							@endif
+
 	
 							<input type="hidden" value="{{ $section->id }}" name='id'>
 	
@@ -48,8 +48,8 @@
 								<input type="text" class="form-control" value="{{ $section->link }}"
 									placeholder="Enter link" name='link'>
 	
+									@endif
 						</div>
-						@endif
 	
 						<div class="card-footer">
 							<button type="submit" class="btn btn-primary mr-2">Submit</button>
